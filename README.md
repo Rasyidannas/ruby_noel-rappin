@@ -14,6 +14,7 @@
 
 ## Run webpack
 
+    Do this first `docker compose exec web sh`
     ```cli
         bin/webpack-dev-server
     ```

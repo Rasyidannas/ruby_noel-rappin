@@ -7,6 +7,15 @@
             <%= link_to("NorthBy", root_path) %>
           </div>
         </div>
+        <div class="flex justify-items-end text-gray-300 px-3 py-2 text-sm font-bold">
+          <span>Favorite Count:</span>
+          <%= turbo_frame_tag("favorites-count-number", src: favorites_path(count_only: true)) do %>
+            <span id="favorites-count" class="ml-2">
+              ?
+            </span>
+          <% end %>
+        </div>
+
         <div class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
             <% if current_user %>
