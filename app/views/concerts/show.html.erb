@@ -45,28 +45,32 @@
     <span class="header">How many tickets would you like?</span>
     <span class="select">
       <select>
-        <%= @concert.venue.seats_per_row.times do |seat| %>
-          <option><%= seat + 1 %></option>
+         <% if @concert.venue.seats_per_row %>
+          <%= @concert.venue.seats_per_row.times do |seat| %>
+            <option><%= seat + 1 %></option>
+          <% end %>
         <% end %>
       </select>
     </span>
   </div>
   <table class="table">
     <tbody>
-      <% @concert.venue.rows.times do |row| %>
-        <tr>
-          <% @concert.venue.seats_per_row.times do |seat| %>
-            <% ticket = @concert.find_ticket_at(row: row + 1, number: seat + 1) %>
-            <td>
-              <%= link_to(ticket_path(ticket.id),
-                    method: :patch) do %>
-                <div class="<%= ticket.color_for(current_user) %> p-4 m-2 border-black border-4 button hover:bg-blue-300 text-lg">
-                  <%= seat + 1 %>
-                </div>
-              <% end %>
-            </td>
-          <% end %>
-        </tr>
+      <% if @concert.venue.rows %>
+        <% @concert.venue&.rows.times do |row| %>
+          <tr>
+            <% @concert.venue.seats_per_row.times do |seat| %>
+              <% ticket = @concert.find_ticket_at(row: row + 1, number: seat + 1) %>
+              <td>
+                <%= link_to(ticket_path(ticket.id),
+                      method: :patch) do %>
+                  <div class="<%= ticket.color_for(current_user) %> p-4 m-2 border-black border-4 button hover:bg-blue-300 text-lg">
+                    <%= seat + 1 %>
+                  </div>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
