@@ -1,6 +1,9 @@
 import { Controller } from "stimulus"
 
 export default class FavoriteToggleController extends Controller {
+  static classes = ["hidden"]
+  hiddenClass: string
+
   static targets = ["elementToHide", "elementWithText"]
   elementToHideTarget: HTMLElement
   elementWithTextTarget: HTMLElement
