@@ -3,24 +3,23 @@ import { Controller } from "stimulus"
 export default class FavoriteToggleController extends Controller {
   static targets = ["elementToHide", "elementWithText"]
   elementToHideTarget: HTMLElement
+  elementWithTextTarget: HTMLElement
 
   static values = { visible: Boolean }
   visibleValue: boolean
 
-  connect(): void {
-    console.log("The controller is connected")
-    this.updateHiddenClass()
-    this.updateText()
-  }
-
   toggle(): void {
     this.flipState()
-    this.updateHiddenClass()
-    this.updateText()
   }
 
   flipState(): void {
     this.visibleValue = !this.visibleValue
+  }
+
+  // this is will auto connect and listen visibleValue when changed
+  visibleValueChanged(): void {
+    this.updateHiddenClass()
+    this.updateText()
   }
 
   updateHiddenClass(): void {
