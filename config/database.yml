@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: north_by
+  password: pass
+  pool: 5
+
+development:
+  <<: *default
+  database: north_by_development
+
+test:
+  <<: *default
+  database: north_by_test
+
+production:
+  <<: *default
+  database: north_by_production
